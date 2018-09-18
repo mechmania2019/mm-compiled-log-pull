@@ -2,9 +2,7 @@ const { promisify } = require("util");
 
 const mongoose = require("mongoose");
 const AWS = require("aws-sdk");
-const uuid = require("node-uuid");
 const authenticate = require("mm-authenticate")(mongoose);
-const { Script } = require("mm-schemas")(mongoose);
 const { send, buffer } = require("micro");
 
 mongoose.connect(process.env.MONGO_URL);
@@ -20,7 +18,11 @@ module.exports = authenticate(async (req, res) => {
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
   const data = s3
-        .getObject({Key: `compiled/${team.latestScript.key}`  })
+    .getObject({ Key: `compiled/${team.latestScript.key}` })
+    .createReadStream()
+    .on("error", error => {
+      console.log(error);
+    });
 
-  send(data, 200, script);
+  send(res, 200, data);
 });
