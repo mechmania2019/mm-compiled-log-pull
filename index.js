@@ -18,8 +18,10 @@ const getObject = promisify(s3.getObject.bind(s3));
 module.exports = authenticate(async (req, res) => {
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
+  if(!team.latestScript) {
+    send(res, 404, "You haven't uploaded any bots yet using `mm push`");
+  }
   const script = await Script.findById(team.latestScript).exec()
-  // await team.execPopulate("latestScript")
   
   console.log("script " + script.key)
   const data = s3
