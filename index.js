@@ -3,14 +3,15 @@ const { promisify } = require("util");
 const mongoose = require("mongoose");
 const AWS = require("aws-sdk");
 const authenticate = require("mm-authenticate")(mongoose);
-const { send, buffer } = require("micro");
 const { Script } = require('mm-schemas')(mongoose)
+
+const send = (res, status, data) => (res.statusCode = status, res.end(data));
 
 mongoose.connect(process.env.MONGO_URL);
 mongoose.Promise = global.Promise;
 
 const s3 = new AWS.S3({
-  params: { Bucket: "mechmania" }
+  params: { Bucket: "mechmania2019" }
 });
 
 const getObject = promisify(s3.getObject.bind(s3));
