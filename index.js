@@ -20,10 +20,10 @@ const s3 = new AWS.S3({
 module.exports = authenticate(async (req, res) => {
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
-  if (!team.latestScript) {
+  if (!team.mostRecentPush) {
     send(res, 404, "You haven't uploaded any bots yet using `mm push`");
   }
-  const script = await Script.findById(team.latestScript).exec()
+  const script = await Script.findById(team.mostRecentPush).exec()
 
   console.log("script " + script.key)
   const data = s3

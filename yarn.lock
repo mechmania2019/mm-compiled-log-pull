@@ -99,17 +99,17 @@ lodash@^4.17.11:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-mm-authenticate@0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/mm-authenticate/-/mm-authenticate-0.0.9.tgz#787079b05b22f943b8176d7cc2f5b01a1f530c0c"
-  integrity sha512-8AJYIjzJhpK5EN2MYO3dA9WWSi+goafOpGuwjOgITpXLza/6XL8oWw1tGTneiZj2sQ8JGJM9pC8MOA03n0pNqw==
+mm-authenticate@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/mm-authenticate/-/mm-authenticate-0.0.10.tgz#e2f73b507c162ea21844d93e8c6fcbca7d52ce25"
+  integrity sha512-idmaApHMjBOFEMw8XYM05dkDfoqURpFSdwwOLfBoq0Qlmgq4q4D/wcCM/6h4CV9XrUCcpSwMWUUH0an66qfE2A==
   dependencies:
-    mm-schemas "0.0.9"
+    mm-schemas "0.0.10"
 
-mm-schemas@0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/mm-schemas/-/mm-schemas-0.0.9.tgz#4e7a6b94c74021546ecdcbfe778772d909413406"
-  integrity sha512-3JbPMnUIKSZGnuiGw+HAWLWw/J80zFuKlgwZiRVESoQN3pf4pZNSRBWHMgLSxygDKVC7ci8f5eJe9EnnIbhS2A==
+mm-schemas@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/mm-schemas/-/mm-schemas-0.0.10.tgz#69836ad7cf229449e1404a83db6b86a1ff181921"
+  integrity sha512-pNUSjCju/G57s8ERDKjWyjTUg8PIbmZTi39soEvLYA6hqVLke6kJo10hNQSIUd2XY2FypgnvQuzwcTlv8bFbUg==
   dependencies:
     cuid "2.1.6"
     mongoose "5.7.1"
