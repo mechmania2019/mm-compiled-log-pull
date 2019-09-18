@@ -5,7 +5,8 @@ const { Script } = require('mm-schemas')(mongoose)
 
 const send = (res, status, data) => (res.statusCode = status, res.end(data));
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise;
 
 AWS.config.update({
