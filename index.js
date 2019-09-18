@@ -13,13 +13,16 @@ const s3 = new AWS.S3({
 });
 
 module.exports = authenticate(async (req, res) => {
+  console.log("Got request");
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
-  if(!team.latestScript) {
+  if (!team.latestScript) {
     send(res, 404, "You haven't uploaded any bots yet using `mm push`");
   }
+  console.log("team");
   const script = await Script.findById(team.latestScript).exec()
-  
+  console.log("finished");
+
   console.log("script " + script.key)
   const data = s3
     .getObject({ Key: `compiled/${script.key}` })
@@ -28,7 +31,7 @@ module.exports = authenticate(async (req, res) => {
       console.log(error);
       send(res, 202, "Not Ready Yet");
     });
-    console.log("script " + script.key)
+  console.log("script " + script.key)
 
-  send(res, 200, data);
+  send(res, 200, JSON.stringify(data));
 });
