@@ -8,20 +8,22 @@ const send = (res, status, data) => (res.statusCode = status, res.end(data));
 mongoose.connect(process.env.MONGO_URL);
 mongoose.Promise = global.Promise;
 
+AWS.config.update({
+  'accessKeyId': process.env.MM_AWS_SECRET_KEY_ID,
+  'secretAccessKey': process.env.MM_AWS_SECRET_ACCESS_KEY,
+  'bucketname': "mechmania2019"
+});
 const s3 = new AWS.S3({
   params: { Bucket: "mechmania2019" }
 });
 
 module.exports = authenticate(async (req, res) => {
-  console.log("Got request");
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
   if (!team.latestScript) {
     send(res, 404, "You haven't uploaded any bots yet using `mm push`");
   }
-  console.log("team");
   const script = await Script.findById(team.latestScript).exec()
-  console.log("finished");
 
   console.log("script " + script.key)
   const data = s3
@@ -33,5 +35,6 @@ module.exports = authenticate(async (req, res) => {
     });
   console.log("script " + script.key)
 
-  send(res, 200, JSON.stringify(data));
+  res.statusCode = 200;
+  data.pipe(res);
 });

@@ -5,8 +5,8 @@
   "scope": "mechmania2019",
   "env": {
     "MONGO_URL": "@mongo-url",
-    "AWSACCESSKEYID": "@awsaccesskeyid",
-    "AWSSECRETACCESSKEY": "@awssecretaccesskey"
+    "MM_AWS_SECRET_KEY_ID": "@aws_secret_key_id",
+    "MM_AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key"
   },
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{ "src": "/.*", "dest": "index.js" }]
