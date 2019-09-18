@@ -1,5 +1,3 @@
-const { promisify } = require("util");
-
 const mongoose = require("mongoose");
 const AWS = require("aws-sdk");
 const authenticate = require("mm-authenticate")(mongoose);
@@ -13,8 +11,6 @@ mongoose.Promise = global.Promise;
 const s3 = new AWS.S3({
   params: { Bucket: "mechmania2019" }
 });
-
-const getObject = promisify(s3.getObject.bind(s3));
 
 module.exports = authenticate(async (req, res) => {
   const team = req.user;
