@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 const AWS = require("aws-sdk");
 const authenticate = require("mm-authenticate")(mongoose);
-const { Script } = require('mm-schemas')(mongoose)
+const { Script } = require("mm-schemas")(mongoose);
 
-const send = (res, status, data) => (res.statusCode = status, res.end(data));
+const send = (res, status, data) => ((res.statusCode = status), res.end(data));
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
 mongoose.Promise = global.Promise;
 
 AWS.config.update({
-  'accessKeyId': process.env.MM_AWS_SECRET_KEY_ID,
-  'secretAccessKey': process.env.MM_AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.MM_AWS_SECRET_KEY_ID,
+  secretAccessKey: process.env.MM_AWS_SECRET_ACCESS_KEY
 });
 
 const s3 = new AWS.S3({
@@ -18,7 +22,6 @@ const s3 = new AWS.S3({
 });
 
 module.exports = authenticate(async (req, res) => {
-
   const team = req.user;
   console.log(`${team.name} - Getting the compiled log file from S3`);
   if (!team.mostRecentPush) {
