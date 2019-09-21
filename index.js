@@ -10,11 +10,12 @@ mongoose.connect(process.env.MONGO_URL, {
   useUnifiedTopology: true,
   useCreateIndex: true
 });
+
 mongoose.Promise = global.Promise;
 
 AWS.config.update({
-  accessKeyId: process.env.MM_AWS_SECRET_KEY_ID,
-  secretAccessKey: process.env.MM_AWS_SECRET_ACCESS_KEY
+  'accessKeyId': process.env.MM_AWS_SECRET_KEY_ID,
+  'secretAccessKey': process.env.MM_AWS_SECRET_ACCESS_KEY,
 });
 
 const s3 = new AWS.S3({
